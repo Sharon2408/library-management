@@ -11,9 +11,16 @@
     <title>{{ config('app.name', 'E-Library') }}</title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    {{-- <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"> --}}
 
+    <!-- BOX ICONS CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+
+    {{-- Bootswatch --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" rel="stylesheet" />
+
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/app.css'])
@@ -21,9 +28,11 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm fixed-top" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <!-- Main Wrapper -->
+                {{-- <a class="btn border-0 me-5" id="menu-btn"><i class="bx bx-menu"></i></a> --}}
+                <a class="navbar-brand text-white" href="{{ url('/') }}" style="font-family:Pacifico;font-size: 18px;">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -37,6 +46,9 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ route('register') }}">My Book Shelf</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('admin.book') }}">View Books</a>
                         </li>
                     </ul>
 
@@ -57,13 +69,13 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item text-white" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -79,11 +91,37 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        @if (session()->has('action-feedback'))
+            <div class="alert alert-success alert-dismissible fade show col-4 text-center " role="alert">
+                <strong> Success Message : </strong> {{ session()->get('action-feedback') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @elseif(session()->has('delete-feedback'))
+            <div class="alert alert-danger alert-dismissible fade show col-4 " role="alert">
+                {{ session()->get('delete-feedback') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @elseif(session()->has('edit-feedback'))
+            <div class="alert alert-info alert-dismissible fade show col-4  text-center" role="alert">
+                {{ session()->get('edit-feedback') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
     </div>
+    </div>
+    @endif
+    <main class="py-5">
+        @yield('content')
+    </main>
+    </div>
+    <script>
+        var menu_btn = document.querySelector("#menu-btn");
+        var sidebar = document.querySelector("#sidebar");
+        var container = document.querySelector(".my-container");
+        menu_btn.addEventListener("click", () => {
+            sidebar.classList.toggle("active-nav");
+            container.classList.toggle("active-cont");
+        });
+    </script>
 </body>
 
 </html>

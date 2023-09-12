@@ -1,5 +1,5 @@
+{{-- @extends('layouts.sidenav') --}}
 @extends('layouts.app')
-
 @section('title')
     Create Book
 @endsection
@@ -13,7 +13,7 @@
                     @csrf
                     @include('layouts/bookform')
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
                         <br><br>
                     </div>
                 </form>

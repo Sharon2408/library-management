@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('title')->unique();
             $table->string('author');
             $table->year('published_year');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('Categories');
+            $table->foreign('category_id')->references('category_id')->on('Categories');
             $table->string('description');
+            $table->string('pdf')->nullable();
             $table->timestamps();
         });
     }

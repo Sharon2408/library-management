@@ -9,29 +9,38 @@ class Book extends Model
 {
     use HasFactory;
 
-protected $fillable = ['title','author','published_year','image','category_id','description'];
+protected $fillable = ['title','author','published_year','image','category_id','description','pdf'];
 
     public function book(){
         return $this->belongsTo(Category::class);
     }
 
-    public function getIdAttribute($attribute){
-        if (isset($this->getId()[$attribute])) {
-            return $this->getId()[$attribute];
+    public function getCategoryidAttribute($attribute){
+
+
+        if (isset($this->getCategoryid()[$attribute])) {
+            return $this->getCategoryid()[$attribute];
         } else {
             return;
         }
     }
     
-        public function getId()
+        public function getCategoryid()
         {
-            return [
-                1 => 'Mystery',
-                2 => 'Thriller',
-                3 => 'Children',
-                4 => 'Adventure',
-                5 => 'Fantasy',
-                6 => 'Fiction'
-            ];
+           
+        return [
+            1 => 'Mystery',
+            2 => 'Thriller',
+            3 => 'Adventure',
+            4 => 'Children',
+            5 => 'Fantasy',
+            6 => 'Science Fiction',
+            7 => 'Romance',
+            8 => 'Non-Fiction',
+            9 => 'Biography',
+            10 => 'Auto-Biography',
+            11 => 'Poetry',
+            12 => 'Travel'
+        ];
         }
 }
