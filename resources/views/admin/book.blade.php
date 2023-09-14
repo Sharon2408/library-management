@@ -11,19 +11,19 @@
             </div>
             <div class="col-10">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a class="btn btn-primary me-md-2" href={{ route('admin.createbook') }}>Add Books</a>
+                    <a class="btn btn-primary mb-2" href={{ route('admin.createbook') }}>Add Books</a>
                 </div>
                 <table class="table table-striped table-hover">
                     <thead class="text-center">
                         <tr>
-                            <td scope="col">Image</td>
-                            <td scope="col">Title</td>
-                            <td scope="col">Author</td>
-                            <td scope="col">Year</td>
-                            <td scope="col">Description</td>
-                            <td scope="col">Category</td>
-                            <td scope="col">Book</td>
-                            <td colspan="2" scope="col">Action</td>
+                            <th scope="col">Image</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Book</th>
+                            <th colspan="2" scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +50,9 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ $books->links() }}
         </div>
     </div>
 @endsection

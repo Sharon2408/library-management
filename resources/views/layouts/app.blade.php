@@ -47,9 +47,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ route('register') }}">My Book Shelf</a>
                         </li>
+                        {{-- @can('view',App\Models\User::class) --}}
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ route('admin.book') }}">View Books</a>
                         </li>
+                        {{-- @endcan --}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -109,7 +111,7 @@
     </div>
     </div>
     @endif
-    <main class="py-5">
+    <main class="py-4">
         @yield('content')
     </main>
     </div>

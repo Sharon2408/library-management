@@ -15,47 +15,26 @@ class BooksController extends Controller
         $this->middleware('auth');
     }
 
-    // Category Display on Home View
-    public function index(Request $request)
-    {
-        $categories = Category::all();
-        $query = '';
-        return view('/home', compact('categories','query'));
-        
-    }
-
-    public function homeView()
-    {
-        $categories = Category::all();
-        return view('/home', compact('categories'));
-    }
 
     // Routing view Category wise
-    public function showCategory($category_id)
+    public function index($category_id)
     {
         $books = Book::where('category_id', $category_id)->get();
         return view('library.book', compact('books'));
     }
 
-    public function getBooks()
+    public function getBooksAdmin()
     {
-        $books = Book::all();
+        $books = Book::paginate(4);
         return view('admin.book', compact('books'));
     }
 
-    public function category()
+    public function createBook()
     {
         $book = new Book();
         $category = Category::all();
         return view('admin/createbook', compact('category', 'book'));
     }
-    private function storeImage($book){
-        if(request()->has('image')){
-          $book->update([
-            'image' => request()->image->store('book_images','public')
-          ]);
-        }
-       }
     
     public function store(Request $request)
     {
@@ -110,5 +89,6 @@ class BooksController extends Controller
         $book -> delete();
         return redirect('admin/book');
        }
+
 
 }

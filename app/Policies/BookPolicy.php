@@ -30,7 +30,7 @@ class BookPolicy
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Book $book)
+    public function view(User $user)
     {
         return in_array($user->email, [
             'admin@gmail.com'
@@ -76,9 +76,9 @@ class BookPolicy
      */
     public function delete(User $user, Book $book)
     {
-        // return in_array($user->email, [
-        //     'admin@gmail.com'
-        // ]);
+         return in_array($user->email, [
+             'admin@gmail.com'
+         ]);
     }
 
     /**
